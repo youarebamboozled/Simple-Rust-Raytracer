@@ -5,9 +5,9 @@ use crate::structs::ray::Ray;
 use crate::structs::vector3::Vector3;
 
 pub struct Sphere {
-    pub center: Vector3,
-    pub radius: f32,
-    pub material: Material,
+    pub(crate)  center: Vector3,
+    pub(crate)  radius: f32,
+    pub(crate)  material: Material,
 }
 
 impl Object for Sphere {
