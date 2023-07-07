@@ -6,4 +6,5 @@ pub struct Intersection {
     pub(crate)  point: Vector3,
     pub(crate)  normal: Vector3,
     pub(crate)  material: Material,
+    pub(crate)  distance: f32,
 }

@@ -7,7 +7,7 @@ pub(crate) struct Ray {
 }
 
 impl Ray {
-    fn new(origin: Vector3, direction: Vector3) -> Ray {
+    pub(crate) fn new(origin: Vector3, direction: Vector3) -> Ray {
         Ray { origin, direction: direction.normalize() }
     }
 

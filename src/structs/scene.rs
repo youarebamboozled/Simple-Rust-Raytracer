@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use crate::structs::light::Light;
 use crate::structs::object::Object;
 

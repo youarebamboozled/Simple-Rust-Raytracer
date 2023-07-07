@@ -19,16 +19,18 @@ impl Object for Sphere {
         let discriminant = b * b - a * c;
         if discriminant > 0.0 {
             let temp = (-b - discriminant.sqrt()) / a;
-            if temp < 0.0 {
+            if temp > 0.0 {
                 let point = ray.point_at_parameter(temp);
                 let normal = point.subtract(&self.center).divide(self.radius);
-                return Some(Intersection { point, normal, material: self.material.clone() });
+                let distance = point.subtract(&ray.origin).length();
+                return Some(Intersection { point, normal, material: self.material.clone(), distance });
             }
             let temp = (-b + discriminant.sqrt()) / a;
-            if temp < 0.0 {
+            if temp > 0.0 {
                 let point = ray.point_at_parameter(temp);
                 let normal = point.subtract(&self.center).divide(self.radius);
-                return Some(Intersection { point, normal, material: self.material.clone() });
+                let distance = point.subtract(&ray.origin).length();
+                return Some(Intersection { point, normal, material: self.material.clone(), distance });
             }
         }
         None
