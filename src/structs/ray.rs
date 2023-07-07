@@ -2,8 +2,8 @@
 use crate::structs::vector3::Vector3;
 
 pub(crate) struct Ray {
-    origin: Vector3,
-    direction: Vector3,
+    pub(crate) origin: Vector3,
+    pub(crate) direction: Vector3,
 }
 
 impl Ray {
