@@ -15,31 +15,68 @@ mod helper;
 fn main() {
     println!("Hello, world!");
     let sphere = Sphere {
-        center: Vector3::new(0.0, 0.0, -5.0),
+        center: Vector3::new(-3.0, 0.0, -5.0),
         radius: 1.0,
         material: Material {
-            albedo: Vector4::new(1.0, 1.0, 0.0, 1.0),
+            albedo: Vector4::new(0.9, 0.9, 0.9, 1.0),
             roughness: 0.0,
-            metallic: 1.0,
+            metalness: 1.0,
+            specular: 1.0,
+            shininess: 100.0,
+            refractive_index: 1.0,
+            transmission: 0.0,
         }
     };
 
     let sphere2 = Sphere {
-        center: Vector3::new(0.0, 0.0, -5.1),
+        center: Vector3::new(-1.0, 0.0, -5.0),
         radius: 1.0,
         material: Material {
-            albedo: Vector4::new(0.0, 0.0, 1.0, 1.0),
+            albedo: Vector4::new(1.0, 1.0, 0.0, 1.0),
             roughness: 0.0,
-            metallic: 1.0,
+            metalness: 1.0,
+            specular: 1.0,
+            shininess: 1.0,
+            refractive_index: 1.0,
+            transmission: 0.0,
+        }
+    };
+
+    let sphere3 = Sphere {
+        center: Vector3::new(1.0, 0.0, -5.0),
+        radius: 1.0,
+        material: Material {
+            albedo: Vector4::new(0.4, 0.4, 0.4, 1.0),
+            roughness: 0.0,
+            metalness: 0.0,
+            specular: 0.0,
+            shininess: 1000.0,
+            refractive_index: 10.0,
+            transmission: 1.0,
+        }
+    };
+
+    let sphere4 = Sphere {
+        center: Vector3::new(3.0, 0.0, -5.0),
+        radius: 1.0,
+        material: Material {
+            albedo: Vector4::new(0.1, 0.1, 0.1, 1.0),
+            roughness: 0.0,
+            metalness: 1.0,
+            specular: 1000.0,
+            shininess: 100.0,
+            refractive_index: 1.0,
+            transmission: 0.0,
         }
     };
 
     let light = Light {
-        position: Vector3::new(-5.0, 0.0, 0.0),
+        position: Vector3::new(0.0, 0.0, 0.0),
         intensity: 10.25,
+        color: Vector4::new(1.0, 1.0, 1.0, 1.0),
     };
-    let width = 1024*2;
-    let height = 1024*2;
+    let width = 1024*2*2*2*2*2*2;
+    let height = 1024*2*2*2*2*2*2;
     let aspect_ratio = width as f32 / height as f32;
     let viewport_height = 2.0;
     let viewport_width = aspect_ratio * viewport_height;
@@ -57,7 +94,7 @@ fn main() {
         vertical,
     };
     let scene = Scene {
-        objects: vec![Box::new(sphere), Box::new(sphere2)],
+        objects: vec![Box::new(sphere), Box::new(sphere2), Box::new(sphere3), Box::new(sphere4)],
         lights: vec![light],
     };
 
@@ -73,7 +110,7 @@ pub(crate) fn render(scene: &Scene, camera: &Camera, width: u32, height: u32) ->
         let u = (x as f32) / (width as f32 - 1.0);
         let v = (y as f32) / (height as f32 - 1.0);
         let ray = camera.get_ray(u, v);
-        let color = trace_ray(&ray, scene, camera);
+        let color = trace_ray(&ray, scene, camera, 0);
         *pixel = Rgb([
             (255.99 * color.x) as u8,
             (255.99 * color.y) as u8,
