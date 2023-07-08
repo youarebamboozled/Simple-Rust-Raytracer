@@ -58,6 +58,10 @@ impl Vector3 {
     pub fn length(&self) -> f32 {
         self.magnitude()
     }
+
+    pub fn squared_length(&self) -> f32 {
+        self.x * self.x + self.y * self.y + self.z * self.z
+    }
 }
 
 impl Debug for Vector3 {
