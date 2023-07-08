@@ -22,7 +22,18 @@ use crate::structs::vector4::Vector4;
 /// See also: `Vector4`, `Vector3`, `Vector2`, `Ray`, `Camera`
 #[derive(Clone, Debug)]
 pub(crate) struct Material {
+    /// The color of the material.
     pub(crate) albedo: Vector4,
+    /// The roughness of the material.
     pub(crate) roughness: f32,
-    pub(crate) metallic: f32,
+    /// The metallicness of the material.
+    pub(crate) metalness: f32,
+    /// The specularness of the material.
+    pub(crate) specular: f32,
+    /// The shininess of the material.
+    pub(crate) shininess: f32,
+    /// How much light is refracted through the material.
+    pub(crate) transmission: f32,
+    /// The refractive index of the material.
+    pub(crate) refractive_index: f32,
 }
